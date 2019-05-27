@@ -36,10 +36,13 @@ class LoginController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|min:6'
         ]);
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         $credentials = $request->only('email', 'password');
+
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
@@ -47,6 +50,7 @@ class LoginController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
+
         return response()->json([
             'token' => $token,
             'token_type' => 'bearer',
