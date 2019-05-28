@@ -17,4 +17,15 @@ cp .env.example .env
 Change the values of the `.env` file as necessary.
 
 ## Testing
-Coming soon
+
+First run the development server using.
+
+```
+php artisan serv
+```
+
+Now you can execute the tests by running the following command.
+
+```
+./vendor/bin/phpunit
+```
